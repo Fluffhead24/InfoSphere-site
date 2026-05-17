@@ -1,0 +1,38 @@
+name: Site Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Scan for local credentials
+        run: |
+          if grep -RInE 'Infosphere26|oauth\.x\.client\.id|client_secret|access_token|refresh_token|sandboxsonar@gmail\.com' \
+            --exclude-dir=.git \
+            --exclude='*.yml' \
+            .; then
+            echo "Credential-like text found in public site."
+            exit 1
+          fi
+
+      - name: Parse HTML
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class Parser(HTMLParser):
+              pass
+
+          for path in Path(".").glob("*.html"):
+              Parser().feed(path.read_text(encoding="utf-8"))
+              print(f"parsed {path}")
+          PY
