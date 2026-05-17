@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>X Data Use | InfoSphere</title>
+    <meta
+      name="description"
+      content="InfoSphere use case and data handling summary for X API data."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="InfoSphere home">InfoSphere</a>
+      <nav aria-label="Primary">
+        <a href="privacy.html">Privacy</a>
+        <a href="x-data-use.html" aria-current="page">X data use</a>
+      </nav>
+    </header>
+
+    <main class="document">
+      <p class="eyebrow">Developer data use</p>
+      <h1>InfoSphere X Data Use</h1>
+      <p class="lede">
+        InfoSphere uses X data only to help the signed-in user understand the public followed-account environment behind their X app time.
+      </p>
+
+      <h2>Use Case</h2>
+      <p>
+        With user authorization, InfoSphere connects the user's public X identity and summarizes public metadata from accounts the user follows. The purpose is to classify the user's followed information environment at an aggregate level.
+      </p>
+
+      <h2>Requested Scopes</h2>
+      <p>
+        InfoSphere requests <code>tweet.read</code>, <code>users.read</code>, and <code>follows.read</code>. The <code>tweet.read</code> scope is requested because X requires it for the user and following endpoints used by the prototype; InfoSphere does not call Tweet/post endpoints.
+      </p>
+
+      <h2>Endpoints Used</h2>
+      <p>
+        InfoSphere uses <code>GET /2/users/me</code> for public identity and <code>GET /2/users/:id/following</code> for followed-account public metadata.
+      </p>
+
+      <h2>Stored Signals</h2>
+      <p>
+        InfoSphere stores aggregate summaries only: followed accounts scanned, verified-account counts, verified-type mix, identity-verified counts, protected-account counts, broad role hints, broad country hints, scan status, and storage-boundary text.
+      </p>
+
+      <h2>Data Not Stored</h2>
+      <p>
+        InfoSphere does not store Tweets, posts, feeds, DMs, authored content, access tokens as dashboard data, or the raw following list.
+      </p>
+
+      <h2>Sharing</h2>
+      <p>
+        X-derived data is not sold, brokered, used for advertising, or shared with third parties by this prototype.
+      </p>
+    </main>
+
+    <footer>
+      <p>Last updated May 17, 2026.</p>
+    </footer>
+  </body>
+</html>
